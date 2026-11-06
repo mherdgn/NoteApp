@@ -1,0 +1,197 @@
+﻿@model NoteApp.Models.Note
+
+@{
+    ViewData["Title"] = "Yeni Not Ekle";
+}
+
+<h2 id="pageHeader">Yeni Not Ekle</h2>
+
+<form asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Başlık</label>
+        <input asp-for="Title" class="form-control" placeholder="Başlık girin" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">İçerik</label>
+
+        <div class="toolbar d-flex align-items-center flex-wrap gap-2 p-2 rounded mb-2"
+             role="toolbar"
+             style="border:1px solid #ced4da;">
+
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+                    onmousedown="keepEditorSelection(event)"
+                    onclick="execCmd('bold')">
+                <b>B</b>
+            </button>
+
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+                    onmousedown="keepEditorSelection(event)"
+                    onclick="execCmd('italic')">
+                <i>I</i>
+            </button>
+
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+                    onmousedown="keepEditorSelection(event)"
+                    onclick="execCmd('underline')">
+                <u>U</u>
+            </button>
+
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+                    onmousedown="keepEditorSelection(event)"
+                    onclick="execCmd('insertUnorderedList')">
+                • Liste
+            </button>
+
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+                    onmousedown="keepEditorSelection(event)"
+                    onclick="execCmd('insertOrderedList')">
+                1. Liste
+            </button>
+
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+                    onmousedown="keepEditorSelection(event)"
+                    onclick="createLinkPrompt()">
+                🔗 Link
+            </button>
+
+            <select class="form-select form-select-sm"
+                    style="width:auto;"
+                    onmousedown="saveSelection()"
+                    onchange="execCmd('foreColor', this.value); this.value = '';">
+                <option value="">Yazı Rengi</option>
+                <option value="white">Beyaz</option>
+                <option value="black">Siyah</option>
+                <option value="red">Kırmızı</option>
+                <option value="blue">Mavi</option>
+                <option value="pink">Pembe</option>
+                <option value="green">Yeşil</option>
+                <option value="orange">Turuncu</option>
+                <option value="purple">Mor</option>
+            </select>
+
+            <select class="form-select form-select-sm"
+                    style="width:auto;"
+                    onmousedown="saveSelection()"
+                    onchange="execCmd('fontName', this.value); this.value = '';">
+                <option value="">Yazı Tipi</option>
+                <option value="Arial">Arial</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Tahoma">Tahoma</option>
+                <option value="Verdana">Verdana</option>
+            </select>
+
+        </div>
+
+        <div id="editor"
+             contenteditable="true"
+             class="form-control"
+             style="min-height:200px; overflow-y:auto;">
+            @Html.Raw(Model?.Content)
+        </div>
+
+        <textarea id="Content" name="Content" hidden></textarea>
+
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Kaydet</button>
+    <a asp-action="Index" class="btn btn-secondary">Geri Dön</a>
+
+</form>
+
+<script>
+    const editor = document.getElementById("editor");
+    const content = document.getElementById("Content");
+    const form = document.querySelector("form");
+
+    let savedRange = null;
+
+    // Editördeki metin seçimini sakla
+    function saveSelection() {
+        const selection = window.getSelection();
+
+        if (selection.rangeCount > 0 &&
+            editor.contains(selection.anchorNode)) {
+            savedRange = selection.getRangeAt(0).cloneRange();
+        }
+    }
+
+    // Butona basarken editörün seçimini kaybetmesini önle
+    function keepEditorSelection(event) {
+        saveSelection();
+        event.preventDefault();
+    }
+
+    // Saklanan metin seçimini geri yükle
+    function restoreSelection() {
+        editor.focus();
+
+        if (savedRange) {
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(savedRange);
+        }
+    }
+
+    // Biçimlendirme komutları
+    function execCmd(command, value = null) {
+        restoreSelection();
+
+        document.execCommand(command, false, value);
+
+        saveSelection();
+        content.value = editor.innerHTML;
+    }
+
+    // Bağlantı ekleme
+    function createLinkPrompt() {
+        restoreSelection();
+
+        const url = prompt("Bağlantı adresini girin:");
+
+        if (url) {
+            execCmd("createLink", url);
+        }
+    }
+
+    // Metin seçimini takip et
+    editor.addEventListener("mouseup", saveSelection);
+    editor.addEventListener("keyup", saveSelection);
+
+    // Yazı yazıldıkça içerik alanını güncelle
+    editor.addEventListener("input", function () {
+        content.value = editor.innerHTML;
+    });
+
+    // Kaydetmeden önce içeriği aktar
+    form.addEventListener("submit", function (event) {
+        content.value = editor.innerHTML;
+
+        if (editor.innerText.trim() === "") {
+            event.preventDefault();
+            alert("Lütfen not içeriğini girin.");
+        }
+    });
+</script>
+
+<style>
+    #editor {
+        background-color: #fff;
+        color: #212529;
+        cursor: text;
+    }
+
+        #editor:focus {
+            outline: none;
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 .2rem rgba(13, 110, 253, .15);
+        }
+
+    .toolbar select {
+        cursor: pointer;
+    }
+</style>

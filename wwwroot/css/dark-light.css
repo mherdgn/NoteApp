@@ -1,0 +1,125 @@
+﻿/* ===========================
+   DARK MODE BODY & TEXT
+=========================== */
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+    body.dark-mode h2#notesHeader,
+    body.dark-mode #pageHeader {
+        color: #fff;
+    }
+
+    /* ===========================
+   DARK MODE CARDS
+=========================== */
+    body.dark-mode .card {
+        background-color: #1e1e1e;
+        color: #f0f0f0;
+        border-color: #333;
+        transition: all 0.3s ease;
+    }
+
+        body.dark-mode .card a,
+        body.dark-mode .card h5,
+        body.dark-mode .card-text {
+            color: #f0f0f0 !important;
+        }
+
+    /* ===========================
+   DARK MODE BUTTONS
+=========================== */
+    body.dark-mode .btn-success {
+        background: linear-gradient(135deg, #4e9b8f, #6fbf9d);
+        color: #fff;
+        transition: all 0.3s ease;
+    }
+
+        body.dark-mode .btn-success:hover {
+            background: linear-gradient(45deg, #4e9b8f, #6fbf9d);
+            transform: scale(1.05);
+        }
+
+    body.dark-mode .btn-secondary {
+        background: linear-gradient(135deg, #5f5a72, #817ca0);
+        color: #fff;
+        transition: all 0.3s ease;
+    }
+
+        body.dark-mode .btn-secondary:hover {
+            background: linear-gradient(45deg, #5f5a72, #817ca0);
+            transform: scale(1.05);
+        }
+
+    body.dark-mode .btn-warning {
+        background: linear-gradient(135deg, #d4a76a, #f0c37a);
+        color: #212529;
+        transition: all 0.3s ease;
+    }
+
+        body.dark-mode .btn-warning:hover {
+            background: linear-gradient(45deg, #d4a76a, #f0c37a);
+            transform: scale(1.05);
+        }
+
+    body.dark-mode .btn-danger {
+        background: linear-gradient(135deg, #e06666, #f28c8c);
+        color: #fff;
+        transition: all 0.3s ease;
+    }
+
+        body.dark-mode .btn-danger:hover {
+            background: linear-gradient(45deg, #e06666, #f28c8c);
+            transform: scale(1.05);
+        }
+
+    body.dark-mode .btn-info {
+        background: linear-gradient(135deg, #7bc6a5, #9be2c6);
+        color: #212529;
+        transition: all 0.3s ease;
+    }
+
+        body.dark-mode .btn-info:hover {
+            background: linear-gradient(45deg, #7bc6a5, #9be2c6);
+            transform: scale(1.05);
+        }
+
+    /* ===========================
+   DARK MODE POPUP
+=========================== */
+    body.dark-mode .delete-modal-content,
+    body.dark-mode .glass-content {
+        background: rgba(30,30,30,0.95);
+        color: #f0f0f0;
+        transition: all 0.3s ease;
+    }
+
+    /* ===========================
+   DARK MODE PAGINATION
+=========================== */
+    body.dark-mode .pagination .page-link {
+        color: #f0f0f0;
+        background-color: #1e1e1e;
+        border: 1px solid #333;
+        transition: all 0.3s ease;
+    }
+
+        body.dark-mode .pagination .page-link:hover {
+            background: linear-gradient(135deg, #5f5a72, #817ca0);
+            color: #fff;
+            border-color: #817ca0;
+        }
+
+    body.dark-mode .pagination .page-item.active .page-link {
+        background: linear-gradient(135deg, #817ca0, #9e9ac8);
+        border-color: #9e9ac8;
+        color: #fff;
+    }
+
+    body.dark-mode .pagination .page-item.disabled .page-link {
+        color: #777;
+        background-color: #1e1e1e;
+        border-color: #333;
+    }

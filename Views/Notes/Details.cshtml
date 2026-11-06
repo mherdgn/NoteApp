@@ -1,0 +1,34 @@
+﻿@model NoteApp.Models.Note
+
+@{
+    ViewData["Title"] = "Not Detayı";
+}
+
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="container mt-5 fade-in">
+    <div class="card p-4 rounded shadow-sm">
+        <h2>@Model.Title</h2>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Oluşturulma Tarihi:</label>
+            <p>@Model.CreatedAt.ToString("dd.MM.yyyy")</p>
+        </div>
+
+        @if (Model.UpdatedAt != null)
+        {
+            <div class="mb-3">
+                <label class="form-label fw-bold">Son Güncelleme Tarihi:</label>
+                <p>@Model.UpdatedAt?.ToString("dd.MM.yyyy")</p>
+            </div>
+        }
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">İçerik:</label>
+            <div class="border p-3 rounded" style="white-space: pre-wrap;">@Html.Raw(Model.Content ?? "")</div>
+        </div>
+
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-1">Düzenle</a>
+        <a asp-action="Index" class="btn btn-secondary">Geri</a>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+﻿@model string
+<div class="toolbar mb-2">
+    <button type="button" class="btn btn-sm btn-outline-dark" onclick="wrapMarkdown('**', '@ViewData["PreviewId"]')"><b>B</b></button>
+    <button type="button" class="btn btn-sm btn-outline-dark" onclick="wrapMarkdown('*', '@ViewData["PreviewId"]')"><i>I</i></button>
+    <button type="button" class="btn btn-sm btn-outline-dark" onclick="wrapMarkdown('__', '@ViewData["PreviewId"]')"><u>U</u></button>
+    <button type="button" class="btn btn-sm btn-outline-dark" onclick="wrapMarkdown('`', '@ViewData["PreviewId"]')">Code</button>
+    <button type="button" class="btn btn-sm btn-outline-dark" onclick="wrapMarkdown('# ', '@ViewData["PreviewId"]')">H1</button>
+    <button type="button" class="btn btn-sm btn-outline-dark" onclick="wrapMarkdown('- ', '@ViewData["PreviewId"]')">Liste</button>
+</div>

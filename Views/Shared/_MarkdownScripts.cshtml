@@ -1,0 +1,29 @@
+﻿<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-csharp.min.js"></script>
+
+<script>
+    function updatePreview(inputId, previewId) {
+        var input = document.getElementById(inputId);
+        var preview = document.getElementById(previewId);
+        if (!input || !preview) return;
+        preview.innerHTML = marked.parse(input.value);
+        Prism.highlightAll();
+    }
+
+    function wrapMarkdown(tag, previewId) {
+        var input = document.getElementById(previewId + "-input");
+        if (!input) return;
+        var start = input.selectionStart;
+        var end = input.selectionEnd;
+        var selected = input.value.substring(start, end);
+        var before = input.value.substring(0, start);
+        var after = input.value.substring(end);
+        input.value = before + tag + selected + tag + after;
+        input.focus();
+        input.selectionStart = start + tag.length;
+        input.selectionEnd = end + tag.length;
+        updatePreview(input.id, previewId);
+    }
+</script>

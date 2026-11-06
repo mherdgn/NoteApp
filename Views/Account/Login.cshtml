@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Giriş Yap";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial;
+        }
+
+        .login-box {
+            width: 380px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .login-title {
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-control {
+            border-radius: 10px;
+        }
+
+        .btn-login {
+            width: 100%;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <h3 class="login-title">🔐 NoteApp Login</h3>
+
+        <form method="post" asp-action="Login">
+
+            <div class="mb-3">
+                <label>Kullanıcı Adı</label>
+                <input type="text" name="username" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+                <label>Şifre</label>
+                <input type="password" name="password" class="form-control" required />
+            </div>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="error mb-2">@ViewBag.Error</div>
+            }
+
+            <button type="submit" class="btn btn-primary btn-login">
+                Giriş Yap
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<NoteApp.Models.Note>
+
+<div class="note-list">
+    @if (!Model.Any())
+    {
+        <p>Hiç not bulunamadı.</p>
+    }
+    else
+    {
+        <ul>
+            @foreach (var note in Model)
+            {
+                <li class="note-item @(note.IsFavorite ? "favorite" : "")">
+                    <strong>@note.Title</strong><br />
+                    <span>@note.Content</span>
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+<style>
+    .note-list ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .note-list li {
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 8px;
+        background-color: #f0f0f0;
+        transition: background 0.2s;
+    }
+
+    .note-list li.favorite {
+        border-left: 4px solid gold;
+    }
+
+    .note-list li:hover {
+        background-color: #e0e0e0;
+    }
+</style>

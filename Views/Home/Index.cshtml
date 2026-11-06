@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "NoteApp";
+}
+
+<div class="hero">
+
+    <div class="hero-card">
+
+        <h1>📝 NoteApp</h1>
+
+        <p>
+            Notlarını oluştur, düzenle, favorilere ekle ve yönet.<br />
+            Hızlı, modern ve sade not uygulaması.
+        </p>
+
+        <div class="mt-4 d-flex gap-2 justify-content-center">
+
+            <a class="btn btn-primary btn-lg" asp-controller="Notes" asp-action="Index">
+                🚀 Notlara Git
+            </a>
+
+            <a class="btn btn-outline-light btn-lg" asp-controller="Account" asp-action="Login">
+                🔐 Giriş Yap
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+    .hero {
+        height: 85vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        border-radius: 20px;
+        margin-top: 20px;
+    }
+
+    .hero-card {
+        text-align: center;
+        color: white;
+        padding: 40px;
+    }
+
+        .hero-card h1 {
+            font-size: 52px;
+            font-weight: bold;
+        }
+
+        .hero-card p {
+            font-size: 18px;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+</style>
